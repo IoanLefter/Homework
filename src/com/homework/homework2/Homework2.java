@@ -1,4 +1,4 @@
-package com.homework.basic_structures;
+package com.homework.homework2;
 
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
