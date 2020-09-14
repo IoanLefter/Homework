@@ -11,104 +11,67 @@ public class Homework2 {
     public static void main(String[] args) {
 //      Ex1_For
         System.out.println(ANSI_RED + "Ex1_For" + ANSI_RESET);
-        int[] array1 = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-        for (int i = 0; i < 10; i++) {
-            System.out.println(Arrays.toString(array1));
-        }
+        displayNumbersEx1();
 
 //      Ex2_For
         System.out.println(ANSI_RED + "Ex2_For" + ANSI_RESET);
-        int[] array2 = new int[10];
-        for (int i = 0; i < 10; i++) {
-            array2[i] = 1;
-            System.out.println(Arrays.toString(array2));
-            array2[i] = 0;
-        }
+        displayNumbersEx2();
 
 //      Ex3_For
         System.out.println(ANSI_RED + "Ex3_For" + ANSI_RESET);
-        int[] array3 = new int[10];
-        for (int i = 0; i < 10 - 1; i++) {
-            array3[i + 1] = 1;
-            System.out.println(Arrays.toString(array3));
-            array3[i + 1] = 0;
-        }
-        System.out.println(Arrays.toString(array3));
+        displayNumbersEx3();
 
 //      Ex4_For
         System.out.println(ANSI_RED + "Ex4_For" + ANSI_RESET);
-        int[] array4 = new int[10];
-        for (int i = 9; i >= 0; i--) {
-            array4[i] = 1;
-            System.out.println(Arrays.toString(array4));
-            array4[i] = 0;
-        }
+        displayNumbersEx4();
 
 //      Ex5_For
         System.out.println(ANSI_RED + "Ex5_For" + ANSI_RESET);
-        for (int i = 0; i <= 5; i++) {
-            for (int n = 0; n <= i; n++) {
-                System.out.print(i);
-            }
-            System.out.println();
-        }
+        displayNumbersEx5();
 
 //      Ex6_For
         System.out.println(ANSI_RED + "Ex6_For" + ANSI_RESET);
-        for (int i = 1; i <= 5; i++) {
-            for (int n = 5; n >= i; n--) {
-                System.out.print(i);
-            }
-            System.out.println();
-        }
+        displayNumbersEx6();
 
 //      Ex7_For
         System.out.println(ANSI_RED + "Ex7_For" + ANSI_RESET);
-        prime_nr_from_2_to_x(1000);
+        primeNrFrom2ToX(1000);
 
 //      Ex8_For
         System.out.println(ANSI_RED + "Ex8_For" + ANSI_RESET);
         int[] array_sort = new int[]{5, 66, 9, 88, 7, 45, 48, 48};
-        sort_list(array_sort);
+        sortList(array_sort);
 
 //      While_exercises
         System.out.println(ANSI_RED + "While_exercises" + ANSI_RESET);
 
 //      Ex1+2_While
         System.out.println(ANSI_RED + "Ex1+2_While" + ANSI_RESET);
-        int incercari = Ghiceste_nr();
-        String incercarile;
-        if (incercari == 1) {
-            incercarile = " incercare.";
-        } else {
-            incercarile = " incercari.";
-        }
-        System.out.println("Ai ghicit din " + incercari + incercarile);
+        ghicesteNrRezultat();
 
 //      Ex3_While
         System.out.println(ANSI_RED + "Ex3_While" + ANSI_RESET);
-        int suma = Suma_nr();
-        System.out.println("Suma numerelor este: " + suma);
+        System.out.println("Suma numerelor este: " + sumaNr());
 
 //      Ex4_While
         System.out.println(ANSI_RED + "Ex4_While" + ANSI_RESET);
-        Laturi_triunghi();
+        verificaLaturiTriunghi();
 
 //      Ex5_While
         System.out.println(ANSI_RED + "Ex5_While" + ANSI_RESET);
-        Testesteaza_palindrom(0);
-        Testesteaza_palindrom(-9);
-        Testesteaza_palindrom(11);
-        Testesteaza_palindrom(789);
-        Testesteaza_palindrom(-999);
-        Testesteaza_palindrom(-789987);
-        Testesteaza_palindrom(6566);
-        Testesteaza_palindrom(85058);
+        testesteazaPalindrom(0);
+        testesteazaPalindrom(-9);
+        testesteazaPalindrom(11);
+        testesteazaPalindrom(789);
+        testesteazaPalindrom(-999);
+        testesteazaPalindrom(-789987);
+        testesteazaPalindrom(6566);
+        testesteazaPalindrom(85058);
 
 //      Ex6_While
         System.out.println(ANSI_RED + "Ex6_While" + ANSI_RESET);
         System.out.println("Gandeste-te la un numar de la 0 la 100");
-        calculatorul_ghiceste_nr();
+        calculatorulGhicesteNr();
 
 //      Ex7_While
         System.out.println(ANSI_RED + "Ex7_While" + ANSI_RESET);
@@ -116,15 +79,79 @@ public class Homework2 {
 
 //      Ex1_SWITCH
         System.out.println(ANSI_RED + "Ex1_SWITCH" + ANSI_RESET);
-        ziua_saptamanii(6);
-        ziua_saptamanii(0);
-        ziua_saptamanii(99);
-        ziua_saptamanii(1);
+        ziuaSaptamanii(6);
+        ziuaSaptamanii(0);
+        ziuaSaptamanii(99);
+        ziuaSaptamanii(1);
+    }
+
+    private static void ghicesteNrRezultat() {
+        int incercari = ghicesteNr();
+        String incercarile;
+        if (incercari == 1) {
+            incercarile = " incercare.";
+        } else {
+            incercarile = " incercari.";
+        }
+        System.out.println("Ai ghicit din " + incercari + incercarile);
+    }
+
+    private static void displayNumbersEx6() {
+        for (int i = 1; i <= 5; i++) {
+            for (int n = 5; n >= i; n--) {
+                System.out.print(i);
+            }
+            System.out.println();
+        }
+    }
+
+    private static void displayNumbersEx5() {
+        for (int i = 0; i <= 5; i++) {
+            for (int n = 0; n <= i; n++) {
+                System.out.print(i);
+            }
+            System.out.println();
+        }
+    }
+
+    private static void displayNumbersEx4() {
+        int[] array4 = new int[10];
+        for (int i = 9; i >= 0; i--) {
+            array4[i] = 1;
+            System.out.println(Arrays.toString(array4));
+            array4[i] = 0;
+        }
+    }
+
+    private static void displayNumbersEx3() {
+        int[] array3 = new int[10];
+        for (int i = 0; i < 10 - 1; i++) {
+            array3[i + 1] = 1;
+            System.out.println(Arrays.toString(array3));
+            array3[i + 1] = 0;
+        }
+        System.out.println(Arrays.toString(array3));
+    }
+
+    private static void displayNumbersEx2() {
+        int[] array2 = new int[10];
+        for (int i = 0; i < 10; i++) {
+            array2[i] = 1;
+            System.out.println(Arrays.toString(array2));
+            array2[i] = 0;
+        }
+    }
+
+    private static void displayNumbersEx1() {
+        int[] array1 = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+        for (int i = 0; i < 10; i++) {
+            System.out.println(Arrays.toString(array1));
+        }
     }
 
 
     //      Functions for "For" exercises
-    static void prime_nr_from_2_to_x(int x) { //n - natural
+    static void primeNrFrom2ToX(int x) { //n - natural
         int[] array = new int[(x + 1) / 2];
         int ind = 0;
         for (int n = 0; n <= x; n++) {
@@ -153,7 +180,7 @@ public class Homework2 {
         System.out.println(Arrays.toString(array_resized));
     }
 
-    static void sort_list(int[] array_sort) {
+    static void sortList(int[] array_sort) {
         int temp;
         for (int i = 0; i <= array_sort.length - 1; i++) {
             for (int j = i + 1; j <= array_sort.length - 1; j++) {
@@ -168,7 +195,7 @@ public class Homework2 {
     }
 
     //      Functions for "While" exercises
-    static int Ghiceste_nr() {
+    static int ghicesteNr() {
         int x = 0;
         int incercari = 0;
         int numar_de_ghicit = 6;
@@ -193,7 +220,7 @@ public class Homework2 {
         return incercari;
     }
 
-    static int Suma_nr() {
+    static int sumaNr() {
         int x = 2;
         int suma = 0;
         while (0 != x) {
@@ -206,7 +233,7 @@ public class Homework2 {
         return suma;
     }
 
-    static void Laturi_triunghi() {
+    static void verificaLaturiTriunghi() {
         int a = 0;
         int b = 0;
         int c = 0;
@@ -226,7 +253,7 @@ public class Homework2 {
         }
     }
 
-    static void calculatorul_ghiceste_nr() {
+    static void calculatorulGhicesteNr() {
         int limita_superioara = 100;
         int limita_inferioara = 0;
         int numar_gasit = 0;
@@ -249,7 +276,7 @@ public class Homework2 {
         }
     }
 
-    static void Testesteaza_palindrom(int n) {
+    static void testesteazaPalindrom(int n) {
 
   /*      if (n == 0) {
             System.out.println("The number is 0");
@@ -303,7 +330,7 @@ public class Homework2 {
     }
 
     //      Function for "SWITCH" exercise
-    static void ziua_saptamanii(int zi) {
+    static void ziuaSaptamanii(int zi) {
         switch (zi) { //String, int, long, boolean
             case 0:
                 System.out.println("Ziua " + zi + " este duminica.");
