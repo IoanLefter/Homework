@@ -4,7 +4,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User extends PosService{
+public class User extends PosService {
     private List<BankAccount> accounts = new ArrayList<>();
 
 
@@ -12,14 +12,29 @@ public class User extends PosService{
         accounts.add(account);
     }
 
-    public void getAccounts() {
+    public List<BankAccount> getAccounts() {
+        return accounts;
+    }
+
+    public void pay(double amount, long cardNumber) {
+        for (BankAccount currentBankAccount : accounts) {
+            for (Card currentCard : currentBankAccount.getCards()) {
+                if (currentCard.getCardNumber() == cardNumber) {
+                    if (currentCard.isCardExpired()){
+                        throw new RuntimeException("Card is expired.");
+                    }
+                    currentBankAccount.withdrawMoney(amount);
+                }
+            }
+        }
+    }
+
+    /*public void getAccounts() {
         System.out.println("This is the list of your accounts:");
         for (int i = 0; i <= accounts.size() - 1; i++) {
             System.out.println(accounts.get(i).getIban()+", with the following available balance: "+accounts.get(i).getBalance());
         }
-    }
-
-
+    }*/
 
 
 }

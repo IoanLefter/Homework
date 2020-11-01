@@ -23,12 +23,12 @@ public class Card {
         int valid = 0;
         do {
             try {
-                if (expirationDate.isBefore(currentDate)) {
+                /*if (expirationDate.isBefore(currentDate)) {
                     throw new RuntimeException("Enter a date greater than today.");
-                } else {
+                } else {*/
                     this.expirationDate = LocalDate.of(year, month, day);
                     valid = 1;
-                }
+                //}
             } catch (Exception e) {
                 System.out.println(e);
                 Scanner console = new Scanner(System.in);
@@ -66,6 +66,10 @@ public class Card {
     }
 
 
+    public boolean isCardExpired(){
+        return getExpirationDate().isBefore(getCurrentDate());
+    }
+
     public LocalDate getExpirationDate() {
         return expirationDate;
     }
@@ -85,6 +89,5 @@ public class Card {
     public long getCardNumber() {
         return cardNumber;
     }
-
 
 }
