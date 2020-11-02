@@ -16,18 +16,21 @@ public class User extends PosService {
         return accounts;
     }
 
-    public void pay(double amount, long cardNumber) {
+    public void pay(double amount, long cardNumber) throws Exception {
         for (BankAccount currentBankAccount : accounts) {
             for (Card currentCard : currentBankAccount.getCards()) {
                 if (currentCard.getCardNumber() == cardNumber) {
-                    if (currentCard.isCardExpired()){
+                    if (currentCard.isCardExpired()) {
                         throw new RuntimeException("Card is expired.");
                     }
                     currentBankAccount.withdrawMoney(amount);
+                    return;
                 }
             }
         }
+        throw new RuntimeException("Card not found.");
     }
+
 
     /*public void getAccounts() {
         System.out.println("This is the list of your accounts:");

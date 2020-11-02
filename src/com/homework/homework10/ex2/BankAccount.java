@@ -15,18 +15,6 @@ public class BankAccount {
         this.balance = 0.0;
     }
 
-    public void pay(double amount, long cardNumber) {
-        try {
-            if (isCardExpired(cardNumber)) {
-                throw new RuntimeException("Card is expired.");
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-            return;
-        }
-        withdrawMoney(amount);
-    }
-
     public void attachCard(Card card) throws ParseException {
         cards.add(card);
     }
@@ -58,18 +46,13 @@ public class BankAccount {
         balance += amount;
     }
 
-    public void withdrawMoney(double amount) {
-        try {
-            if (balance >= amount) {
-                balance -= amount;
-                System.out.println("Your account has been successfully debited with amount " + amount);
-            } else {
-                throw new RuntimeException("Insufficient funds. You have in your account just: " + balance);
-            }
-        } catch (Exception e) {
-            System.out.println(e);
+    public void withdrawMoney (double amount) throws Exception {
+        if (balance >= amount) {
+            balance -= amount;
+            System.out.println("Your account has been successfully debited with amount " + amount);
+        } else {
+            throw new Exception("Insufficient funds. You have in your account just: " + balance);
         }
-
     }
 
     public String getIban() {

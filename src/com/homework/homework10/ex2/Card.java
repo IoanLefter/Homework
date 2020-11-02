@@ -82,10 +82,6 @@ public class Card {
         return ownerName;
     }
 
-    public void setOwnerName(String ownerName) {
-        this.ownerName = ownerName;
-    }
-
     public long getCardNumber() {
         return cardNumber;
     }
