@@ -1,4 +1,4 @@
-package main.java.com.homework.homework7;
+package com.homework.homework7;
 
 public class Tema7 {
     public static void main(String[] args) {

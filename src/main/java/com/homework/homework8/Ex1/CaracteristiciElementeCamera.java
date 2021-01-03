@@ -1,4 +1,4 @@
-package main.java.com.homework.homework8.Ex1;
+package com.homework.homework8.Ex1;
 
 public class CaracteristiciElementeCamera {
     private double lungime;

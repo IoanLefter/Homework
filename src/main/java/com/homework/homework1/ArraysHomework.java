@@ -1,4 +1,4 @@
-package main.java.com.homework.homework1;
+package com.homework.homework1;
 
 public class ArraysHomework {
     public static void main(String[] args) {

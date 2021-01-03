@@ -1,4 +1,4 @@
-package main.java.com.homework.homework8.Ex2;
+package com.homework.homework8.Ex2;
 
 public class DeluxeHamburger {
     private Hamburger Hamburger;
@@ -8,7 +8,7 @@ public class DeluxeHamburger {
     private double chipsPrice;
     private int withDrinkAndOrChips;
 
-    public DeluxeHamburger(main.java.com.homework.homework8.Ex2.Hamburger hamburger) {
+    public DeluxeHamburger(com.homework.homework8.Ex2.Hamburger hamburger) {
         Hamburger = hamburger;
     }
 

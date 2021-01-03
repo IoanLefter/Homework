@@ -1,4 +1,4 @@
-package main.java.com.homework.homework10.ex2;
+package com.homework.homework10.ex2;
 
 import java.text.ParseException;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package main.java.com.homework.homework3;
+package com.homework.homework3;
 
 public class Tema3 {
     public static final String ANSI_RESET = "\u001B[0m";

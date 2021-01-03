@@ -1,4 +1,4 @@
-package main.java.com.homework.homework9.MovieRental;
+package com.homework.homework9.MovieRental;
 
 import java.util.ArrayList;
 import java.util.List;

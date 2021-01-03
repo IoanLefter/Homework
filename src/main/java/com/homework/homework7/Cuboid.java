@@ -1,4 +1,4 @@
-package main.java.com.homework.homework7;
+package com.homework.homework7;
 
 public class Cuboid extends Rectangle{
     private double height;

@@ -1,4 +1,4 @@
-package main.java.com.homework.homework9;
+package com.homework.homework9;
 
 public class Problem1b {
     public static void main(String []args){

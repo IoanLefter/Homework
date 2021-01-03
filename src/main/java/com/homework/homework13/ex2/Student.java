@@ -1,4 +1,4 @@
-package main.java.com.homework.homework13.ex2;
+package com.homework.homework13.ex2;
 
 import java.util.Objects;
 

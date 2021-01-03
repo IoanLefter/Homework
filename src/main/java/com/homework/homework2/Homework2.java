@@ -1,4 +1,4 @@
-package main.java.com.homework.homework2;
+package com.homework.homework2;
 
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;

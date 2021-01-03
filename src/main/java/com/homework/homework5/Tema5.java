@@ -1,6 +1,6 @@
-package main.java.com.homework.homework5;
+package com.homework.homework5;
 
-import main.java.com.homework.homework4.Tema4;
+import com.homework.homework4.Tema4;
 
 import java.util.Objects;
 import java.util.Scanner;

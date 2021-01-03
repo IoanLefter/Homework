@@ -1,4 +1,4 @@
-package main.java.com.homework.homework8.Ex2;
+package com.homework.homework8.Ex2;
 
 public class MainEx2 {
     public static void main(String[] args) {

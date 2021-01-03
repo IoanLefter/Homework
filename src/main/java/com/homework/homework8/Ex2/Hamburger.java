@@ -1,4 +1,4 @@
-package main.java.com.homework.homework8.Ex2;
+package com.homework.homework8.Ex2;
 
 public class Hamburger {
     private String breadRollType;

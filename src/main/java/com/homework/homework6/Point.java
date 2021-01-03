@@ -1,4 +1,4 @@
-package main.java.com.homework.homework6;
+package com.homework.homework6;
 
 public class Point {
 

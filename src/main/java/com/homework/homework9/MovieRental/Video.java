@@ -1,4 +1,4 @@
-package main.java.com.homework.homework9.MovieRental;
+package com.homework.homework9.MovieRental;
 
 public class Video {
     private String title;
