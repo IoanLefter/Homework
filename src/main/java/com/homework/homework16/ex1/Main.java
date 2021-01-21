@@ -2,7 +2,6 @@ package com.homework.homework16.ex1;
 
 import java.io.*;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
@@ -13,20 +12,29 @@ public class Main {
 
         extractWords(INPUT_TXT);
 
-        printAndExportMap(sortDescByValue(uniqueWordCount(INPUT_TXT)), OUTPUT_TXT);
+        System.out.println();
+
+        printAndExportMap(sortDescByValueAskByKey(uniqueWordCount(INPUT_TXT)), OUTPUT_TXT);
 
     }
 
     public static List<String> extractWords(String INPUT_TXT) {
-        List<String> tokens = null;
-        try (
-                Scanner sc = new Scanner(new FileInputStream(INPUT_TXT))) {
-            tokens = sc.tokens()
-                    .collect(Collectors.toList());
+        List<String> tokens = new ArrayList<>();
 
-        } catch (
-                IOException e) {
-            e.printStackTrace();
+        StringBuilder text = new StringBuilder();
+
+        try (BufferedReader in = new BufferedReader(new FileReader(INPUT_TXT))) {
+
+            String line;
+
+            while ((line = in.readLine()) != null) {
+                text.insert(0, line.replaceAll("([\\[\\],.?!():'-])", " $1 "));
+            }
+
+            tokens = Arrays.asList(text.toString().split("\\s"));
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
         return tokens;
     }
@@ -43,12 +51,11 @@ public class Main {
     }
 
 
-    private static Map<String, Integer> sortDescByValue(Map<String, Integer> unsortMap) {
+    private static Map<String, Integer> sortDescByValueAskByKey(Map<String, Integer> unsortMap) {
 
-        List<Map.Entry<String, Integer>> list =
-                new LinkedList<>(unsortMap.entrySet());
+        List<Map.Entry<String, Integer>> list = new LinkedList<>(unsortMap.entrySet());
 
-        Collections.sort(list, (o1, o2) -> -1 * (o1.getValue()).compareTo(o2.getValue()));
+        list.sort((o1, o2) -> (-1 * (o1.getValue()).compareTo(o2.getValue()) != 0) ? -1 * (o1.getValue()).compareTo(o2.getValue()) : o1.getKey().compareTo(o2.getKey()));
 
         Map<String, Integer> sortedMap = new LinkedHashMap<>();
         for (Map.Entry<String, Integer> entry : list) {
@@ -59,7 +66,7 @@ public class Main {
 
 
     public static <K, V> void printAndExportMap(Map<K, V> map, String OUTPUT_TXT) {
-        try (BufferedWriter out = new BufferedWriter(new FileWriter(OUTPUT_TXT));) {
+        try (BufferedWriter out = new BufferedWriter(new FileWriter(OUTPUT_TXT))) {
             for (Map.Entry<K, V> entry : map.entrySet()) {
                 System.out.println(entry.getValue() + " : " + entry.getKey());
                 out.write(entry.getValue() + " : " + entry.getKey() + "\n");
