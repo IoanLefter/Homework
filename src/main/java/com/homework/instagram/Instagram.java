@@ -7,7 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -15,12 +14,14 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import java.util.Random;
 
-import java.io.IOException;
+import java.io.File;
+import java.io.PrintWriter;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 import static com.homework.instagram.ExtractUsers.extractUsers;
@@ -61,23 +62,23 @@ public class Instagram {
     }
 
     @Test
-    public void instagramUnfollow() throws IOException, InterruptedException {
-        instagramLogin("", "");
+    public void instagramUnfollow() throws Exception {
+        instagramLogin("AMZleonidas", "");
         unfollowUsersThatAreNotFollowingBack();
         //followUsersThatAreFollowingBack();
 
 
     }
 
-    public void unfollowUsersThatAreNotFollowingBack() throws IOException, InterruptedException {
+    public void unfollowUsersThatAreNotFollowingBack() throws Exception {
         //list of followers
         List<String> followers = new ArrayList<>();
-        followers.addAll(extractUsers("src/main/java/com/homework/instagram/followers.txt"));
+        followers.addAll(extractUsers("src/main/java/com/homework/instagram/1followers.txt"));
         //followers.stream().forEach(System.out::println);
 
         //list of following
         List<String> following = new ArrayList<>();
-        following.addAll(extractUsers("src/main/java/com/homework/instagram/following.txt"));
+        following.addAll(extractUsers("src/main/java/com/homework/instagram/2following.txt"));
         //following.stream().forEach(System.out::println);
 
         //list of users that are not followers back
@@ -90,8 +91,8 @@ public class Instagram {
 
 
         //unfollow users that are not following
-        int numberOfErrors=0;
-        int counter=0;
+        int numberOfErrors = 0;
+        int counter = 0;
         Random random = new Random();
         for (String user : differences) {
             final long DELAY_TIME_MIN = 2000L;               // Minimal delay time between requests
@@ -99,31 +100,33 @@ public class Instagram {
             final int LONG_DELAY_FREQ = 12;                  // How often to add additional delay time
             final long LONG_DELAY_ADDED_TIME = 120000L;      // Additional delay time
             System.out.println("Unfollowing user: " + user);
-            numberOfErrors+=unfollow(user);
-            if (numberOfErrors>3){
+            numberOfErrors += unfollow(user);
+            if (numberOfErrors > 3) {
                 System.out.println("Number of errors > 3");
                 return;
             }
 
             //checkIfUnfollowLimitIsReached
-            if(checkIfUnfollowLimitIsReached()){
+            if (checkIfUnfollowLimitIsReached()) {
                 System.out.println("***Unfollow limit reached***");
-                return ;
+                return;
             }
 
             //dynamic wait if unfollow is not working
             navigate("https://www.instagram.com/" + user + "/");
-            if (!checkIfUnfollowIsSuccessfull()){
+            if (!checkIfUnfollowIsSuccessfull()) {
                 System.out.println("sleep 5 min");
                 sleep(300000);
                 unfollow(user);
                 navigate("https://www.instagram.com/" + user + "/");
-                if (!checkIfUnfollowIsSuccessfull()){
+                if (!checkIfUnfollowIsSuccessfull()) {
                     System.out.println("sleep 10 min");
                     sleep(600000);
                     unfollow(user);
                 }
             }
+
+            removeUserFromFile(user,"src/main/java/com/homework/instagram/2following.txt");
 
             //dynamic wait for each user
             long sleepTime = DELAY_TIME_MIN * (1 + random.nextInt((int) (DELAY_TIME_MAX / DELAY_TIME_MIN)));
@@ -134,15 +137,37 @@ public class Instagram {
         }
     }
 
-    public void followUsersThatAreFollowingBack() throws IOException {
+    public void removeUserFromFile(String user,String file) throws Exception {
+        String filePath = file;
+        String result = fileToString(filePath);
+        //Replacing the word with desired one
+        result = result.replaceAll(user + "<\\/a><\\/span>", "");
+        //Rewriting the contents of the file
+        PrintWriter writer = new PrintWriter(new File(filePath));
+        writer.append(result);
+        writer.flush();
+    }
+
+    public static String fileToString(String filePath) throws Exception {
+        String input = null;
+        Scanner sc = new Scanner(new File(filePath));
+        StringBuffer sb = new StringBuffer();
+        while (sc.hasNextLine()) {
+            input = sc.nextLine();
+            sb.append(input);
+        }
+        return sb.toString();
+    }
+
+    public void followUsersThatAreFollowingBack() throws Exception {
         //list of followers
         List<String> followers = new ArrayList<>();
-        followers.addAll(extractUsers("src/main/java/com/homework/instagram/followers.txt"));
+        followers.addAll(extractUsers("src/main/java/com/homework/instagram/1followers.txt"));
         //followers.stream().forEach(System.out::println);
 
         //list of following
         List<String> following = new ArrayList<>();
-        following.addAll(extractUsers("src/main/java/com/homework/instagram/following.txt"));
+        following.addAll(extractUsers("src/main/java/com/homework/instagram/2following.txt"));
         //following.stream().forEach(System.out::println);
 
         //list of users that are followers but i don't follow
@@ -152,25 +177,27 @@ public class Instagram {
         System.out.println("---sfarsit de lista de dat follow---");
         System.out.println("-------------------------------");
         System.out.println();
-        int numberOfErrors=0;
+        int numberOfErrors = 0;
 
         //follow users that are following
         for (String user : differences) {
             System.out.println("Following user: " + user);
-            numberOfErrors+=follow(user);
-            if (numberOfErrors>3){
+            numberOfErrors += follow(user);
+            if (numberOfErrors > 3) {
                 System.out.println("Number of errors > 3");
                 return;
             }
-
-
         }
     }
 
     public void instagramLogin(String username, String password) {
         navigate("https://www.instagram.com/");
         sleep(1000);
-        find(By.xpath(".//*[@class=\"aOOlW  bIiDR  \"]")).click();
+        try {
+            find(By.xpath("//button[contains(text(),'Accept')]")).click();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
 
         WebElement user = new WebDriverWait(driver, 3)
@@ -196,8 +223,6 @@ public class Instagram {
             find(By.xpath(".//*[@aria-label=\"Following\"]")).click();
             sleep((int) (random() * 500));
             find(By.xpath("//button[contains(text(),'Unfollow')]")).click();
-            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(),'Follow')]")));
-
         } catch (Exception e) {
             System.out.println("Can't find Following button for user " + person);
             isError = 1;
@@ -235,7 +260,7 @@ public class Instagram {
         int isError = 0;
         try {
             find(By.xpath("//button[contains(text(),'Follow')]")).click();
-            sleep((int) (1000+random()*500));
+            sleep((int) (1000 + random() * 500));
         } catch (Exception e) {
             System.out.println("Can't find Follow button for user " + person);
             isError = 1;

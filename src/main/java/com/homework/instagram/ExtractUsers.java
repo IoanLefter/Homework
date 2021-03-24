@@ -7,11 +7,11 @@ import java.util.regex.Pattern;
 public class ExtractUsers {
     public static void main(String[] args) throws IOException {
         List<String> followers= new ArrayList<>();
-        followers.addAll(extractUsers("src/main/java/com/homework/instagram/followers.txt"));
+        followers.addAll(extractUsers("src/main/java/com/homework/instagram/1followers.txt"));
         //followers.stream().forEach(System.out::println);
 
         List<String> following= new ArrayList<>();
-        following.addAll(extractUsers("src/main/java/com/homework/instagram/following.txt"));
+        following.addAll(extractUsers("src/main/java/com/homework/instagram/2following.txt"));
         following.stream().forEach(System.out::println);
 
         //list of users that are not followers
