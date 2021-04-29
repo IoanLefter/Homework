@@ -16,6 +16,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.Duration;
 import java.util.ArrayList;
@@ -66,9 +67,10 @@ public class Instagram {
         instagramLogin("AMZleonidas", "");
         unfollowUsersThatAreNotFollowingBack();
         //followUsersThatAreFollowingBack();
-
+        //cmd("shutdown /s /f /t 5");
 
     }
+
 
     public void unfollowUsersThatAreNotFollowingBack() throws Exception {
         //list of followers
@@ -95,10 +97,10 @@ public class Instagram {
         int counter = 0;
         Random random = new Random();
         for (String user : differences) {
-            final long DELAY_TIME_MIN = 2000L;               // Minimal delay time between requests
-            final long DELAY_TIME_MAX = 20000L;              // Maximal delay time between requests
+            final long DELAY_TIME_MIN = 3000L;               // Minimal delay time between requests
+            final long DELAY_TIME_MAX = 10000L;              // Maximal delay time between requests
             final int LONG_DELAY_FREQ = 12;                  // How often to add additional delay time
-            final long LONG_DELAY_ADDED_TIME = 120000L;      // Additional delay time
+            final long LONG_DELAY_ADDED_TIME = 60000L;      // Additional delay time
             System.out.println("Unfollowing user: " + user);
             numberOfErrors += unfollow(user);
             if (numberOfErrors > 3) {
@@ -126,7 +128,7 @@ public class Instagram {
                 }
             }
 
-            removeUserFromFile(user,"src/main/java/com/homework/instagram/2following.txt");
+            removeUserFromFile(user, "src/main/java/com/homework/instagram/2following.txt");
 
             //dynamic wait for each user
             long sleepTime = DELAY_TIME_MIN * (1 + random.nextInt((int) (DELAY_TIME_MAX / DELAY_TIME_MIN)));
@@ -137,7 +139,7 @@ public class Instagram {
         }
     }
 
-    public void removeUserFromFile(String user,String file) throws Exception {
+    public void removeUserFromFile(String user, String file) throws Exception {
         String filePath = file;
         String result = fileToString(filePath);
         //Replacing the word with desired one
@@ -287,5 +289,16 @@ public class Instagram {
             e.printStackTrace();
         }
     }
+
+    public void cmd(String command) throws InterruptedException, IOException {
+        try {
+            Process process = Runtime.getRuntime().exec(new String[]{"cmd.exe", "/c", command});
+            System.out.println(command);
+
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
 
 }
